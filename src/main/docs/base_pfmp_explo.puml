@@ -1,0 +1,133 @@
+@startuml
+
+class Individu << Entity >> {
+  - id: Bigint
+  - nom: String
+  - prenom: String
+  - civilite: String
+  - code_synchro: String
+  - telephoneMobile: String
+  - telephoneFixe: String
+  - email: String
+  + getters() et setters()
+  + equals()
+  + hashCode()
+  + toString()
+}
+
+class Utilisateur << Entity >> {
+   -id: Bigint
+   -login: String
+   -mdp : String
+   + getters() et setters()
+   + equals()
+   + hashCode()
+   + toString()
+}
+
+class Division << Entity >> {
+   - id: Bigint
+   - code: String
+   - libelle: String
+   + getters() et setters()
+   + equals()
+   + hashCode()
+   + toString()
+}
+
+class Niveau << Entity >> {
+   - id: Bigint
+   - code: String
+   - niveauCourt: String
+   - niveauLong: String
+   + getters() et setters()
+   + equals()
+   + hashCode()
+   + toString()
+}
+
+class Discipline << Entity >> {
+   - id: Bigint
+   - code: String
+   - libelle: String
+   + getters() et setters()
+   + equals()
+   + hashCode()
+   + toString()
+}
+
+class Stagiaire << Entitiy >> {
+   - id
+   - civilite
+   - nom
+   - prenom
+   - naissance
+   - mail
+   - telephoneFixe
+   - telephoneMobile
+   + getters() et setters()
+   + equals()
+   + hashCode()
+   + toString()
+}
+
+class Stage << Entitiy >> {
+   - id
+   + getters() et setters()
+   + equals()
+   + hashCode()
+   + toString()
+}
+
+class Entreprise << Entitiy >> {
+   - id
+   + getters() et setters()
+   + equals()
+   + hashCode()
+   + toString()
+}
+
+class Employe << Entitiy >> {
+   - id
+   + getters() et setters()
+   + equals()
+   + hashCode()
+   + toString()
+}
+
+class Visite << Entitiy >> {
+   - id
+   + getters() et setters()
+   + equals()
+   + hashCode()
+   + toString()
+}
+
+class Template << Entitiy >> {
+   - id
+   + getters() et setters()
+   + equals()
+   + hashCode()
+   + toString()
+}
+
+hide circle
+hide methods
+
+Individu "0..1" --- "0..1" Utilisateur
+Individu "*" ---> "*" Division
+Individu " *   " ---> "*" Discipline
+Division "0..*" --- "0..1" Niveau
+
+Stagiaire "0..*" --- "0..1" Division
+Stagiaire "0..*" --- "0..1" Stage
+Individu "0..1" --- "0..*" Stage : référent
+Individu "0..1" --- "0..*" Stage : suivi
+Entreprise "0..1" --- "0..n" Stage
+Employe "0..*" --- "0..1" Entreprise
+Employe "0..1" --- "0..*" Stage : responsable
+Employe "0..1" --- "0..*" Stage : tuteur
+Visite "0..*" --- "0..1" Stage
+Visite "0..*" --- "0..1" Individu
+
+@enduml

@@ -1,0 +1,65 @@
+@startuml
+
+class Individu << Entity >> {
+  - id: Bigint
+  - nom: String
+  - prenom: String
+  - civilite: String
+  - naissance: Date
+  - code_synchro: String
+  - telephoneMobile: String
+  - telephoneFixe: String
+  - email: String
+  + getters() et setters()
+  + equals()
+  + hashCode()
+  + toString()
+}
+
+class Utilisateur << Entity >> {
+   -id: Bigint
+   -login: String
+   -mdp : String
+   + getters() et setters()
+   + equals()
+   + hashCode()
+   + toString()
+}
+
+class Division << Entity >> {
+   - id: Bigint
+   - code: String
+   - libelle: String
+   + getters() et setters()
+   + equals()
+   + hashCode()
+   + toString()
+}
+
+class Niveau << Entity >> {
+   - id: Bigint
+   - code: String
+   - niveauCourt: String
+   - niveauLong: String
+   + getters() et setters()
+   + equals()
+   + hashCode()
+   + toString()
+}
+
+class Discipline << Entity >> {
+   - id: Bigint
+   - code: String
+   - libelle: String
+   + getters() et setters()
+   + equals()
+   + hashCode()
+   + toString()
+}
+
+hide circle
+Individu "0..*" --- "profs *" Division
+Individu " profs *" --- "0..*" Discipline
+Division "0..*" --- "0..1" Niveau
+Individu "1 " --- "0..1" Utilisateur
+@enduml

@@ -1,0 +1,18 @@
+h2 {
+    background-color: aquamarine;
+    text-align: center;
+}
+th,td{
+    /*background-color: aquamarine;*/
+    text-align: center;
+}
+th{
+    background-color: aquamarine;
+}
+body{
+    background-color: azure;
+}
+h1{
+    text-align: center;
+
+}

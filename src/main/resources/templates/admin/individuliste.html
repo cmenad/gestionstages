@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Gestion des individus</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: menu"/>
+<div class="container">
+
+<h1 class="titlebody">Individus</h1>
+<table class="table table-fixed">
+    <tr class="text-center">
+        <th>id</th>
+        <th>codeSynchro</th>
+        <th>civilite</th>
+        <th>nom</th>
+        <th>prenom</th>
+        <!--<th>telephoneMobile</th>
+        <th>telephoneFixe</th>
+        <th>email</th>-->
+        <th>divisions</th>
+        <th>disciplines</th>
+        <th colspan="2" sec:authorize="hasAuthority('ADMIN')">Action</th>
+    </tr>
+    <tr th:each="i : ${individus}" class="text-center">
+        <td th:text="${i.id}">id</td>
+        <td th:text="${i.codeSynchro}">codeSynchro</td>
+        <td th:text="${i.civilite} == 1 ? 'Mr' : 'Mme'">civilite</td>
+        <!--<td th:text="${i.civilite}">civilite</td>-->
+        <td th:text="${i.nom}">nom</td>
+        <td th:text="${i.prenom}">prenom</td>
+        <!--<td th:text="${i.telephoneMobile}">telephoneMobile</td>
+        <td th:text="${i.telephoneFixe}">telephoneFixe</td>
+        <td th:text="${i.email}">email</td>-->
+        <td th:text="${i.divisions}">divisions</td>
+        <td th:text="${i.disciplines}">disciplines</td>
+        <!--
+        <td class="text-center">
+            <form th:action="'/individu/modif/'+${i.id} " method="get">
+                <input type="submit" value="modify"/>
+            </form>
+        </td>
+        <td class="text-center">
+            <form th:action="'/individu/delete/'+${i.id}" method="get">
+                <input type="submit" value="delete"/>
+            </form>
+        </td>
+        -->
+        <td >
+            <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/individu/modif/' + ${i.id}}" class="btn btn-sm btn-outline-warning text-center">modify</a>
+        </td>
+        <td >
+            <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/individu/delete/' + ${i.id}}" class="btn btn-sm btn-outline-danger text-center">delete</a>
+        </td>
+    </tr>
+</table>
+    <!--
+    <form action="/individu/form" method="get" class="text-center">
+        <p><input type="submit" value="Ajouter un individu" /></p>
+    </form>
+    -->
+    <div class="text-center" >
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/individu/form'}" class="btn btn-sm btn-outline-success">Ajouter un individu</a>
+    </div></div>
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

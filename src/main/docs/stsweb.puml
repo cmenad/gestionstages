@@ -1,0 +1,135 @@
+@startuml
+
+    object type_ahe {
+      code: String
+      libelle_court: String
+      libelle_long: String
+    }
+
+    object civilite {
+      code: String
+      libelle_court: String
+      libelle_long: String
+    }
+
+    object mefstat4 {
+      code: String
+      libelle_court: String
+      libelle_long: String
+      indemnite_pp_autorisee: Bolean
+    }
+
+    object taux_pond {
+      taux: String
+      cpge_bts: String
+    }
+
+    object mod_cours {
+      code: String
+      libelle_court: String
+      libelle_long: String
+      co_ens: Boolean
+    }
+
+    object matiere {
+      code: String
+      code_gestion: String
+      libelle_court: String
+      libelle_long: String
+      libelle_edition: String
+    }
+
+    object mef {
+      code: String
+      formation: String
+      specialite: String
+      libelle_long: String
+      libelle_edition: String
+      mefstat11: String
+      mefstat4: String
+    }
+
+    object programme {
+      code_mef: String
+      code_matiere: String
+      horaire: Float
+    }
+
+
+
+
+        object individu{
+          id: String
+          type: String
+          sexe: String
+          civilite: String
+          nom_usage: String
+          nom_patronymique: String
+          prenom: String
+          date_naissance: Date
+          grade: String
+          fonctions: String
+        }
+        object discipline{
+          code: String
+          libelle_court: String
+        }
+        object obligation{
+          individu: String
+          discipline: String
+          horaire: Float
+        }
+
+        object service_enseignant{
+          individu_id: String
+          division_code: String
+          matiere_code: String
+          heures_agent: Float
+          taux_ponderation: String
+        }
+
+        object division{
+          code: String
+          effectif_prevu: Integer
+          effectif_calcule: Integer
+        }
+
+        object mef_appartenance{
+          code_mef: String
+          code_division: String
+          effectif_prevu: Integer
+          effectif_calcule: Integer
+        }
+
+        object service{
+          code_division: String
+          code_matiere: String
+          code_mod_cours: String
+          heures_structure: Float
+          co_ens: Boolean
+        }
+
+
+
+
+division "0..1" --- "1..*" mef_appartenance
+division "0..1"--- "0..*" service_enseignant
+division "1..1" --- "0..*" service
+mef_appartenance "0..*" --- "0..1" mef
+service "1..1"--- "1..*" service_enseignant
+service "0..*" --- "1..1" mod_cours
+service_enseignant "0..*" --- "0..1" taux_pond
+service "0..*" --- "1..1" matiere
+
+
+individu "1..1" --- "0..*" obligation
+obligation "0..*" --- "1..1" discipline
+individu "0..*" --- "1..1" civilite
+individu "1..1" --- "0..*" service_enseignant
+
+
+programme "0..*" --- "1..1" mef
+mef "0..*" --- "1..1" mefstat4
+programme "0..*" --- "1..1" matiere
+
+@enduml

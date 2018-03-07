@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:if="${action} == 'modif'">Modification d'une discipline</title>
+    <title th:unless="${action} == 'modif'">Ajout d'une discipline</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: menu"/>
+<div class="container">
+
+<h1 th:if="${action} == 'modif'">Modification d'une discipline</h1>
+<h1 th:unless="${action} == 'modif'">Ajout d'une discipline</h1>
+
+<form action="#"
+      th:action="@{/discipline/update}"
+      th:object="${discipline}"
+      method="post">
+
+    <input type="hidden" th:field="*{id}">
+    <p>Code : <input type="text" th:field="*{code}"  /></p>
+    <p>Libelle : <input type="text" th:field="*{libelle}" /></p>
+    <p><input type="submit" value="Valider"/> <input type="reset" value="Reset" /></p>
+</form>
+</div>
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestion des disciplines</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        table, th, td {
+            border: 1px solid darkblue;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div th:if="${message}">
+    <h2 th:text="${'Erreur : ' + message}"/>
+</div>
+
+<h1>Test Check</h1>
+  <p th:text="${individu.login}">individu login</p>
+
+</body>
+</html>

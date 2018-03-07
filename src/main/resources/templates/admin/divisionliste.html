@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Gestion des divisions</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: menu"/>
+<div>
+
+<h1 class="titlebody">Divisions</h1>
+<table class="table">
+    <tr class="text-center">
+        <th>id</th>
+        <th>code</th>
+        <th>libelle</th>
+        <th>niveau</th>
+        <th colspan="2" sec:authorize="hasAuthority('ADMIN')">Action</th>
+    </tr>
+    <tr th:each="d : ${divisions}" class="text-center">
+        <td th:text="${d.id}">id</td>
+        <td th:text="${d.code}">code</td>
+        <td th:text="${d.libelle}">libelle</td>
+        <td th:text="${d.niveau}">niveau</td>
+        <!--
+        <td class="text-center">
+            <form th:action="'/division/modif/'+${d.id} " method="get">
+                <input type="submit" value="modify" class="btn-outline-success"/>
+            </form>
+        </td>
+        <td class="text-center">
+            <form th:action="'/division/delete/'+${d.id}" method="get">
+                <input type="submit" value="delete" class="btn-outline-danger"/>
+            </form>
+        </td>
+        -->
+
+        <td >
+            <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/division/modif/' + ${d.id}}" class="btn btn-sm btn-outline-warning text-center">modify</a>
+        </td>
+        <td >
+            <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/division/delete/' + ${d.id}}" class="btn btn-sm btn-outline-danger text-center">delete</a>
+        </td>
+
+    </tr>
+</table>
+    <!--
+    <form action="/division/form" method="get" class="text-center">
+        <p><input type="submit" value="Ajouter une division" /></p>
+    </form>
+-->
+<div  class="text-center" >
+<a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/division/form'}" class="btn btn-sm btn-outline-success">Ajouter une division</a>
+</div>
+</div>
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

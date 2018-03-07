@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Upload</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: menu"/>
+<h1>Spring Boot - Upload Status</h1>
+
+<div th:if="${message}">
+    <h2 th:text="${message}"/>
+</div>
+<div class="text-center">
+    <a  class="btn btn-sm btn-outline-success"  th:href="@{'/populate'}">Charger la base de donnée</a>
+    <br />
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

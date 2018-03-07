@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ajout d'un individu</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: menu"/>
+<div class="container">
+
+    <h1>Ajouter un individu</h1>
+    <form action="#"
+          th:action="@{/individu/update}"
+          th:object="${individu}"
+          method="post">
+
+        <input type="hidden" th:field="*{id}">
+        <p>Code : <input type="text" th:field="*{codeSynchro}"  /></p>
+        <p>Nom : <input type="text" th:field="*{nom}" /></p>
+        <p>Prenom : <input type="text" th:field="*{prenom}" /></p>
+        <p>Civilite : <input type="text" th:field="*{civilite}" /></p>
+        <p><input type="submit" value="Valider"/></p>
+    </form>
+</div>
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

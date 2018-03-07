@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Gestion des niveaux</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: menu"/>
+<div class="container">
+
+<h1 class="titlebody">Niveaux</h1>
+<table class="table">
+    <tr class="text-center">
+        <th>id</th>
+        <th>code</th>
+        <th>libelleCourt</th>
+        <th>libelleLong</th>
+        <th colspan="2" sec:authorize="hasAuthority('ADMIN')">Action</th>
+    </tr>
+    <tr th:each="n : ${niveaux}" class="text-center">
+        <td th:text="${n.id}">id</td>
+        <td th:text="${n.code}">code</td>
+        <td th:text="${n.libelleCourt}">libelleCourt</td>
+        <td th:text="${n.libelleLong}">libelleLong</td>
+        <!--
+        <td class="text-center">
+            <form th:action="'/niveau/modif/'+${n.id} " method="get">
+                <input type="submit" value="modify"/>
+            </form>
+        </td>
+        <td class="text-center">
+            <form th:action="'/niveau/delete/'+${n.id}" method="get">
+                <input type="submit" value="delete"/>
+            </form>
+        </td>
+        -->
+        <td sec:authorize="hasAuthority('ADMIN')">
+            <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/niveau/modif/' + ${n.id}}" class="btn btn-sm btn-outline-warning text-center">modify</a>
+        </td>
+        <td sec:authorize="hasAuthority('ADMIN')">
+            <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/niveau/delete/' + ${n.id}}" class="btn btn-sm btn-outline-danger text-center">delete</a>
+        </td>
+    </tr>
+</table>
+    <!--
+    <form action="/niveau/form" method="get" class="text-center">
+        <p><input type="submit" value="Ajouter un niveau" /></p>
+    </form>
+    -->
+    <div class="text-center" >
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/niveau/form'}" class="btn btn-sm btn-outline-success">Ajouter un niveau</a>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Gestion des disciplines</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: menu"/>
+<div class="container">
+
+<h1 class="titlebody">Disciplines</h1>
+<table class="table">
+    <tr class="text-center">
+        <th>id</th>
+        <th>code</th>
+        <th>libellé</th>
+        <th colspan="2" sec:authorize="hasAuthority('ADMIN')">Action</th>
+    </tr>
+    <tr th:each="d : ${disciplines}" class="text-center">
+        <td th:text="${d.id}"> id</td>
+        <td th:text="${d.code}"> code</td>
+        <td th:text="${d.libelle}"> libelle</td>
+        <!--
+        <td style="text-align: center">
+            <form th:action="'/discipline/modif/'+${d.id} " method="get">
+                <input type="submit" value="modify"/>
+            </form>
+        </td>
+        <td style="text-align: center">
+            <form th:action="'/discipline/delete/'+${d.id}" method="get">
+                <input type="submit" value="delete"/>
+            </form>
+        </td>
+        -->
+
+        <td>
+            <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/discipline/modif/' + ${d.id}}" class="btn btn-sm btn-outline-warning text-center">modify</a>
+        </td>
+        <td>
+            <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/discipline/delete/' + ${d.id}}" class="btn btn-sm btn-outline-danger text-center">delete</a>
+        </td>
+
+    </tr>
+</table>
+    <!--
+    <form action="/discipline/form" method="get">
+        <p><input type="submit" value="Ajouter une discipline" /></p>
+    </form>
+    -->
+    <div class="text-center">
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/discipline/form'}" class="btn btn-sm btn-outline-success">Ajouter une discipline</a>
+    </div></div>
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

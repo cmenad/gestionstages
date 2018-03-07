@@ -1,0 +1,19 @@
+@startuml
+
+state "New" as New
+
+state "Persistence context" as Persisted {
+  state "Managed" as Managed
+  state "Removed" as Removed
+  [*] --> Managed
+  Managed --> Managed : refresh()
+  Managed --> Removed : remove()
+  Removed --> Managed : persist()
+ }
+
+ [*] --> New : new
+ New --> Persisted : persit()
+ Detached --> Persisted : merge
+ Managed --> Detached : clear() close()
+
+@enduml

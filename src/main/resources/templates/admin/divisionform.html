@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:if="${action} == 'modif'">Modification d'une division</title>
+    <title th:unless="${action} == 'modif'">Ajout d'une division</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: menu"/>
+<div class="container">
+
+    <h1 th:if="${action} == 'modif'">Modification d'une division</h1>
+    <h1 th:unless="${action} == 'modif'">Ajout d'une division</h1>
+
+<form action="#"
+      th:action="@{/division/update}"
+      th:object="${division}"
+      method="post">
+
+    <input type="hidden" th:field="*{id}">
+    <p>Code : <input type="text" th:field="*{code}"  /></p>
+    <p>Libelle : <input type="text" th:field="*{libelle}" /></p>
+    <!-- TODO mettre en liste les niveaux ? Mapping liste niveaux + details du niveau-->
+    <p>Niveau :
+        <input type="text" th:field="*{niveau}"></p>
+        <!--
+        <select>
+            <div th:if="${action} == 'modif'"><option th:text="*{niveau}"></option></div>
+            <div th:unless="${action} == 'modif'"><option></option></div>
+            <option th:each="nx : ${niveaux}" th:value="*{niveau}" th:text="${nx}"></option>
+        </select>
+        -->
+
+        <!--<input type="text" th:field="*{niveau}" /></p>-->
+    <p><input type="submit" value="Valider"/> <input type="reset" value="Reset" /></p>
+</form>
+</div>
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>
